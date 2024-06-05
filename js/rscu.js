@@ -17,8 +17,34 @@ const codonDict = {
     'GGT': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G',
 };
 
-// Calculate codon usage from a DNA sequence
-function calculateCodonUsage(sequence) {
+aa_codons = {}
+aa_codons["A"] = 4 //(GCT, GCC, GCA, GCG)
+aa_codons["R"] = 6 //(CGT, CGC, CGA, CGG, AGA, AGG)
+aa_codons["N"] = 2 //(AAT, AAC)
+aa_codons["D"] = 2 //(GAT, GAC)
+aa_codons["C"] = 2 //(TGT, TGC)
+aa_codons["E"] = 2 //(GAA, GAG)
+aa_codons["Q"] = 2 //(CAA, CAG)
+aa_codons["G"] = 4 //(GGT, GGC, GGA, GGG)
+aa_codons["H"] = 2 //(CAT, CAC)
+aa_codons["I"] = 3 //(ATT, ATC, ATA)
+aa_codons["L"] = 6 //(TTA, TTG, CTT, CTC, CTA, CTG)
+aa_codons["K"] = 2 //(AAA, AAG)
+aa_codons["M"] = 1 //(ATG)
+aa_codons["F"] = 2 //(TTT, TTC)
+aa_codons["P"] = 4 //(CCT, CCC, CCA, CCG)
+aa_codons["S"] = 6 //(TCT, TCC, TCA, TCG, AGT, AGC)
+aa_codons["T"] = 4 //(ACT, ACC, ACA, ACG)
+aa_codons["W"] = 1 //(TGG)
+aa_codons["Y"] = 2 //(TAT, TAC)
+aa_codons["V"] = 4 //(GTT, GTC, GTA, GTG)
+aa_codons["*"] = 3 //(TAA, TAG, TGA)
+
+// Calculate RSCU usage from a DNA sequence
+// RSCU of codon x = ((count of X / count of trans[x]) * synonymous codons)
+
+
+function calculateRSCU(sequence) {
     var codonCount = {};
     var aminoAcidCount = {};
     var totalCodons = 0;
@@ -44,7 +70,7 @@ function calculateCodonUsage(sequence) {
     thead.classList.add("table-dark");
     var row = thead.insertRow(0);
 
-    for (const val of ["Codon", "Amino Acid", "Count", "Total Usage", "Relative Usage"]) {
+    for (const val of ["Codon", "Amino Acid", "Count", "Relative Synonymous Codon Usage (RSCU)"]) {
         cell = row.insertCell();
         cell.innerHTML = val;
     }
@@ -53,21 +79,19 @@ function calculateCodonUsage(sequence) {
 
     for (const codon in codonCount) {
         amino_acid = codonDict[codon];
-        result_count = codonCount[codon];
-        result_total_percent = ((result_count / totalCodons) * 100);
-        result_relative_percent = ((result_count / aminoAcidCount[amino_acid]) * 100);
 
-        if (isNaN(result_total_percent)) {
-            result_total_percent = 0;
-        }
-        
-        if (isNaN(result_relative_percent)) {
-            result_relative_percent = 0;
+        result_count = codonCount[codon];
+        aa_count = aminoAcidCount[amino_acid];
+        synonymous_codons = aa_codons[amino_acid];
+
+        rscu = ((result_count / aa_count) * synonymous_codons)
+
+        if (isNaN(rscu)) {
+            rscu = 0;
         }
 
         var row = tbody.insertRow();
-
-        for (const val of [codon, amino_acid, result_count, result_total_percent.toFixed(3), result_relative_percent.toFixed(3)]) {
+        for (const val of [codon, amino_acid, result_count, rscu.toFixed(3)]) {
             var cell = row.insertCell();
             cell.innerHTML = val;
         }
@@ -89,7 +113,7 @@ $("#button-calculate").click(function() {
         }
     }
 
-    calculateCodonUsage(sequence);
+    calculateRSCU(sequence);
 })
 
 

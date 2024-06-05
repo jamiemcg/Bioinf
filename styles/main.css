@@ -27,3 +27,18 @@ textarea {
 label {
     padding-bottom: 5px;
 }
+
+#log-pane {
+    max-height: 120px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.dropdown-item:active:focus {
+    color: #ffffff; 
+    background-color: #212529;
+}
+
+.dropdown-focused {
+    color: #ffffff; 
+    background-color: #212529;
+}

@@ -23,15 +23,54 @@
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <a href="index.html" class="btn btn-light" role="button">Home</a>
-            <a href="codon_usage.html" class="btn btn-light" role="button">Codon Usage</a>
-            <a href="gc_content.html" class="btn btn-light" role="button">GC Content</a>
-            <a href="#" class="btn btn-dark" role="button">GC Content Plot</a>
-            <a href="gc_skew.html" class="btn btn-light" role="button">GC Skew Plot</a>
+
+            <!-- Codon usage dropdown -->
+            <div class="dropdown">
+              <a class="btn btn-light dropdown-toggle" href="#" role="button" id="codon-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Codon Usage
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="codon-dropdown">
+                <li><a class="dropdown-item" href="codon_usage.html">Codon Usage Calculator</a></li>
+                <li><a class="dropdown-item" href="rscu.html">RSCU Calculator</a></li>
+              </ul>
+            </div>
+          
+            <div class="dropdown">
+              <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="gc-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                GC Content
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="gc-dropdown">
+                <li><a class="dropdown-item" href="gc_content.html">GC Content Calculator</a></li>
+                <li><a class="dropdown-item dropdown-focused" href="gc_content_plot.html">GC Content Plot</a></li>
+                <li><a class="dropdown-item" href="gc_skew.html">GC Skew Plot</a></li>
+              </ul>
+            </div>
+
             <a href="iupac_to_regex.html" class="btn btn-light" role="button">IUPAC to regex</a>
             <a href="complement.html" class="btn btn-light" role="button">Reverse Complement</a>
             <a href="translation.html" class="btn btn-light" role="button">Protein Translation</a>
-            <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">Plotting Tools</a>
-            <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">Venn Diagram</a>
+
+            <!-- Plotting tools dropdown -->
+            <div class="dropdown">
+              <a class="btn btn-light dropdown-toggle" href="#" role="button" id="plotting-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Plotting Tools
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="plotting-dropdown">
+                <li><a class="dropdown-item disabled" href="#">Bar Plot</a></li>
+                <li><a class="dropdown-item disabled" href="#">Box Plot</a></li>
+                <li><a class="dropdown-item disabled" href="#">Donut Plot</a></li>
+                <li><a class="dropdown-item disabled" href="#">Line Plot</a></li>
+                <li><a class="dropdown-item disabled" href="#">Pie Chart</a></li>
+                <li><a class="dropdown-item disabled" href="#">Ridgeline Plot</a></li>
+                <li><a class="dropdown-item disabled" href="#">Scatter Plot</a></li>
+                <li><a class="dropdown-item disabled" href="#">Venn Diagram</a></li>
+                <li><a class="dropdown-item disabled" href="#">Violin Plot</a></li>
+              </ul>
+            </div>
+
             <!-- <a href="#" class="btn btn-light" role="button">Original</a> -->
           </ul>
     

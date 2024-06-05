@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="GC Content Calculator tool calculates the GC guanine / cytosine content and AT adenine / thymine content of a given DNA / RNA / genome fasta sequence.">
-    <title>GC Content Calculator - Bioinformatics Tools</title>
+    <meta name="description" content="Codon Usage Calculator tool calculates the total and relative synonymous codon usage frequency for each codon / amino acid from a given DNA / RNA / genome fasta sequence.">
+    <title>RSCU Relative Synonymous Codon Usage Calculator - Bioinformatics Tools</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link href="styles/main.css" rel="stylesheet">
 
@@ -26,23 +26,24 @@
 
             <!-- Codon usage dropdown -->
             <div class="dropdown">
-              <a class="btn btn-light dropdown-toggle" href="#" role="button" id="codon-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="codon-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 Codon Usage
               </a>
             
               <ul class="dropdown-menu" aria-labelledby="codon-dropdown">
                 <li><a class="dropdown-item" href="codon_usage.html">Codon Usage Calculator</a></li>
-                <li><a class="dropdown-item" href="rscu.html">RSCU Calculator</a></li>
+                <li><a class="dropdown-item dropdown-focused" href="rscu.html">RSCU Calculator</a></li>
               </ul>
             </div>
-          
+            
+            <!-- GC content dropdown -->
             <div class="dropdown">
-              <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="gc-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="btn btn-light dropdown-toggle" href="#" role="button" id="gc-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 GC Content
               </a>
             
               <ul class="dropdown-menu" aria-labelledby="gc-dropdown">
-                <li><a class="dropdown-item dropdown-focused" href="gc_content.html">GC Content Calculator</a></li>
+                <li><a class="dropdown-item" href="gc_content.html">GC Content Calculator</a></li>
                 <li><a class="dropdown-item" href="gc_content_plot.html">GC Content Plot</a></li>
                 <li><a class="dropdown-item" href="gc_skew.html">GC Skew Plot</a></li>
               </ul>
@@ -80,10 +81,9 @@
       </div>
 
     <div class="container">
-        <h2>GC Content Calculator</h2>
-        <p>This program calculates the % GC (guanine / cytosine) content of a given DNA/RNA sequence.</p>
-        <p>(Use the <a target="_blank" href="./gc_content_plot.html">GC Content Plotter Tool</a> if you want to plot the GC content)</p>
-        <p>Enter your DNA/RNA sequence in the box below in FASTA or plaintext format:</p>
+        <h2>RSCU Calculator</h2>
+        <p>This program calculates relative synonymous codon usage (RSCU) of DNA/RNA sequence(s). The program will report overall RSCU values (e.g., genome-wide).</p>
+        <p>Enter your DNA/RNA sequence(s) in the box below in FASTA or plaintext format:</p>
         <p><textarea id="sequence" cols="80" rows="7"></textarea></p>
         <button id="button-calculate" class="btn btn-dark">Calculate</button>
         <button id="button-clear" class="btn btn-light">Clear</button>
@@ -95,45 +95,9 @@
         <div class="card">
             <div class="card-header"><strong>Results</strong></div>
             <div class="card-body">
-                <p>GC content: <span id="gc-content">0</span>%</p>
-                <p>Length: <span id="length">0</span> bp</p>
-                <table class="table table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col">Base</th>
-                            <th scope="col">Count</th>
-                            <th scope="col">Percentage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">A</th>
-                            <td id="a-count">0</td>
-                            <td id="a-percent">0.00%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">C</th>
-                            <td id="c-count">0</td>
-                            <td id="c-percent">0.00%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">G</th>
-                            <td id="g-count">0</td>
-                            <td id="g-percent">0.00%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">T/U</th>
-                            <td id="t-count">0</td>
-                            <td id="t-percent">0.00%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Other</th>
-                            <td id="other-count">0</td>
-                            <td id="other-percent">0.00%</td>
-                        </tr>
-                    </tbody>
-                </table>
                 
+                <table class="table table-striped table-hover" id="results-table">
+                </table>
             </div>
         </div>
     </div>
@@ -148,6 +112,6 @@
 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-      <script src="js/gc.js"></script>
+      <script src="js/rscu.js"></script>
   </body>
 </html>
