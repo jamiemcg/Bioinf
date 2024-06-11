@@ -41,7 +41,8 @@ aa_codons["V"] = 4 //(GTT, GTC, GTA, GTG)
 aa_codons["*"] = 3 //(TAA, TAG, TGA)
 
 // Calculate RSCU usage from a DNA sequence
-// RSCU of codon x = ((count of X / count of trans[x]) * synonymous codons)
+// RSCU of codon x = (count of codon x / (total count of synonymous codons / number of synonymous codons))
+
 
 
 function calculateRSCU(sequence) {
@@ -84,7 +85,8 @@ function calculateRSCU(sequence) {
         aa_count = aminoAcidCount[amino_acid];
         synonymous_codons = aa_codons[amino_acid];
 
-        rscu = ((result_count / aa_count) * synonymous_codons)
+        // rscu = ((result_count / aa_count) * synonymous_codons)
+        rscu = (result_count / (aa_count / synonymous_codons));
 
         if (isNaN(rscu)) {
             rscu = 0;
@@ -95,12 +97,9 @@ function calculateRSCU(sequence) {
             var cell = row.insertCell();
             cell.innerHTML = val;
         }
-        
     }
 
     $("#results-card").show(500)
-
-    return codonCount;
 }
 
 $("#button-calculate").click(function() {
