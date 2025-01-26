@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Bioinformatics Tools - a collection of simple easy to use online bioinformatics tools.">
-    <title>Bioinformatics Tools</title>
+    <meta name="description" content="Codon Usage Calculator tool calculates the total and relative synonymous codon usage frequency for each codon / amino acid from a given DNA / RNA / genome fasta sequence.">
+    <title>Phred Quality Score Converter - Bioinformatics Tools</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link href="styles/main.css" rel="stylesheet">
 
@@ -22,7 +22,7 @@
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <a href="#" class="btn btn-dark" role="button">Home</a>
+            <a href="index.html" class="btn btn-light" role="button">Home</a>
 
             <!-- Codon usage dropdown -->
             <div class="dropdown">
@@ -51,7 +51,7 @@
 
             <a href="iupac_to_regex.html" class="btn btn-light" role="button">IUPAC to regex</a>
             <a href="complement.html" class="btn btn-light" role="button">Reverse Complement</a>
-            <a href="phred.html" class="btn btn-light" role="button">Phred Score</a>
+            <a href="#" class="btn btn-dark" role="button">Phred Score</a>
             <a href="translation.html" class="btn btn-light" role="button">Protein Translation</a>
 
             <!-- Plotting tools dropdown -->
@@ -72,37 +72,100 @@
                 <li><a class="dropdown-item disabled" href="#">Violin Plot</a></li>
               </ul>
             </div>
-
-            <!-- <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">Venn Diagram</a> -->
-            <!-- <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">MSA Viewer</a>
-            <a href="#" class="btn btn-light disabled" role="button" aria-disabled="true">Phylogeny Viewer</a> -->
+            <!-- <a href="#" class="btn btn-light" role="button">Original</a> -->
           </ul>
     
-          <!-- Button on the right of the header -->
-          <!-- <div class="col-md-3 text-end">
-            <a href="#" class="btn btn-primary" role="button">Right</a>
-          </div> -->
+          <div class="col-md-3 text-end">
+            <!-- <a href="#" class="btn btn-primary" role="button">Right</a> -->
+          </div>
         </header>
       </div>
 
     <div class="container">
-      <h2>Online Bioinformatics Tools</h2>
-      <ul class="list-group" id="tool-list">
-        <a href="codon_usage.html" class="list-group-item">Codon Usage Calculator</a>
-        <a href="rscu.html" class="list-group-item">Relative Synonymous Codon Usage (RSCU) Calculator</a>
-        <a href="gc_content.html" class="list-group-item">GC Content Calculator</a>
-        <a href="gc_content_plot.html" class="list-group-item">GC Content Plotter</a>
-        <a href="gc_skew.html" class="list-group-item">GC Skew Plotter</a>
-        <a href="iupac_to_regex.html" class="list-group-item">IUPAC to Regular Expression</a>
-        <a href="complement.html" class="list-group-item">Reverse Complement Calculator</a>
-        <a href="phred.html" class="list-group-item">Phred Quality Score Converter</a>
-        <a href="translation.html" class="list-group-item">Protein Translation</a>
-        <a href="#" class="list-group-item disabled" aria-disabled="true">Plotting Tools</a>
-        <a href="#" class="list-group-item disabled" aria-disabled="true">Venn Diagram</a>
-        <!-- <a href="#" class="list-group-item disabled" aria-disabled="true">Multiple Sequence Alignment Viewer</a>
-        <a href="#" class="list-group-item disabled" aria-disabled="true">Phylogeny Viewer</a> -->
-      </ul>
+        <h2>Phred Quality Score Converter</h2>
+        <p>This online program converts between Phred quality scores and error probabilities.</p>
+
+        <form>
+          <div class="row align-items-center gap-1 mb-2">
+              <div class="col-3 text-end">
+                  <label for="phredScore" class="col-form-label">Phred Score (Q):</label>
+              </div>
+              <div class="col-4">
+                  <input type="number" id="input-phredScore" class="form-control form-control-sm" placeholder="Enter Phred score" min="0">
+              </div>
+          </div>
+
+          <div class="row align-items-center gap-1 mb-2">
+              <div class="col-3 text-end">
+                  <label for="errorProbability" class="col-form-label">Error Probability (P):</label>
+              </div>
+              <div class="col-4">
+                  <input type="number" id="input-errorProbability" class="form-control form-control-sm" placeholder="Enter error probability" min="0"  max="1" step="0.000001">
+              </div>
+          </div>
+
+          <div class="row align-items-center gap-1 mb-2">
+            <div class="col-3 text-end">
+                <label for="errorProbability" class="col-form-label">Base Accuracy:</label>
+            </div>
+            <div class="col-4">
+                <input type="number" disabled id="input-baseAccuracy" class="form-control form-control-sm" placeholder="Enter base accuracy" min="0">
+            </div>
+        </div>
+
+          <div class="row align-items-center gap-1 mb-2">
+              <div class="col-3 text-end">
+                  <label for="asciiValue" class="col-form-label">ASCII value:</label>
+              </div>
+              <div class="col-4">
+                  <input type="text" id="input-asciiValue" class="form-control form-control-sm" maxlength="1" placeholder="Enter ascii char">
+              </div>
+          </div>
+      </form>
+
+        <hr>
+
+        <p>The Phred quality score of a nucleotide is an number representing the estimated probability that that nucleotide is incorrect. The FASTQ format encodes phred scores as ASCII characters.</p>
+
+        <img width="400px" alt="Formula showing conversion between Phred quality scores and error probabilities" src="phred.png">
+        <br><br>
+
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th>Phred Quality Score</th>
+              <th>Probability of incorrect base call</th>
+              <th>Base call accuracy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>10</td>
+              <td>0.1 (1 in 10)</td>
+              <td>90%</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>0.01 (1 in 100)</td>
+              <td>99%</td>
+            </tr>
+            <tr>
+              <td>30</td>
+              <td>0.001 (1 in 1000)</td>
+              <td>99.9%</td>
+            </tr>
+            <tr>
+              <td>40</td>
+              <td>0.0001 (1 in 10,000)</td>
+              <td>99.99%</td>
+            </tr>
+          </tbody>
+        </table>
+
     </div>
+
+    <br>
+
 
     <div class="container">
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -112,6 +175,8 @@
         </footer>
       </div>
 
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+      <script src="js/phred.js"></script>
   </body>
 </html>
