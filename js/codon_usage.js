@@ -1,3 +1,6 @@
+var previousAlertMultipleSeqs = false;
+var previousAlertCharacters = false;
+
 const codonDict = {
     'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
     'CTT': 'L', 'CTC': 'L', 'CTA': 'L', 'CTG': 'L',
@@ -70,8 +73,7 @@ function calculateCodonUsage(sequence) {
         for (const val of [codon, amino_acid, result_count, result_total_percent.toFixed(3), result_relative_percent.toFixed(3)]) {
             var cell = row.insertCell();
             cell.innerHTML = val;
-        }
-        
+        }   
     }
 
     $("#results-card").show(500)
@@ -81,17 +83,30 @@ function calculateCodonUsage(sequence) {
 
 $("#button-calculate").click(function() {
     var sequence = "";
+    var n_seqs = 0;
 
     var lines = $("#sequence").val().toUpperCase().replaceAll("U", "T").split("\n");
     for (var i = 0; i < lines.length; i++) {
         if (lines[i].trim()[0] != ">") {
             sequence += lines[i].trim();
         }
+        else {
+            n_seqs += 1;
+        }
+    }
+
+    if (n_seqs > 1 && previousAlertMultipleSeqs == false) {
+        $("#alert-placeholder").append('<div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Note:</strong> You have entered multiple sequences. This tool concatenates all input sequences together. You should ensure all of your sequences are in the correct reading frame, etc...<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+        previousAlertMultipleSeqs = true;
+    }
+
+    if (/[^ACGT]/.test(sequence) && previousAlertCharacters == false) {
+        $("#alert-placeholder").append('<div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Note:</strong> Your input text contains characters other than A, C, G, T, and U. Check your input.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+        previousAlertCharacters = true;
     }
 
     calculateCodonUsage(sequence);
 })
-
 
 $("#button-clear").click(function() {
     $("#sequence").val("");
